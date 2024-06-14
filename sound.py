@@ -6,7 +6,7 @@
 """
 
 __author__='lintkurage'
-__version__='0.0.1'
+__version__='0.1.0'
 __date__='2024/06/14'
 
 import struct
