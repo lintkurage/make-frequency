@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 
 """
-正弦波、矩形波、三角波、のこぎり波のwavファイルを出力する.
+sin,square,triangle,sawtooth wave makeing program
 """
 
 __author__='lintkurage'
-__version__='0.4.0'
+__version__='1.0.0'
 __date__='2024/06/14'
 
 import struct
