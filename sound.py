@@ -36,6 +36,10 @@ def main():
     sine_fname='sine.wav'
     sine(f0,amplitude,sampling_frequency,frame,sine_fname)
 
+    #square wave
+    square_fname='square.wav'
+    square(f0,amplitude,sampling_frequency,frame,higher_harmonics_number,square_fname)
+
 
 def create_sine(f0,amplitude,sampling_frequency,frame):
     """
@@ -50,6 +54,18 @@ def sine(f0,amplitude,sampling_frequency,frame,sine_fname):
     sin_wave=create_sine(f0,amplitude,sampling_frequency,frame)
     sin_wave=minmax_normalized(sin_wave)
     wave_pack(sin_wave,frame,sampling_frequency,sine_fname)
+
+def square(f0,amplitude,sampling_frequency,frame,higher_harmonics_number,square_fname):
+    """
+    create square wave
+    """
+    square_wave=create_sine(f0,amplitude,sampling_frequency,frame)
+    for i in range(3,2*higher_harmonics_number,2):
+        waves=(1/i)*create_sine(f0*i,amplitude,sampling_frequency,frame)
+        square_wave+=waves
+    
+    square_wave=minmax_normalized(square_wave)
+    wave_pack(square_wave,frame,sampling_frequency,square_fname)
 
 def minmax_normalized(waves):
     """
