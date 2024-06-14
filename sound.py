@@ -40,6 +40,10 @@ def main():
     square_fname='square.wav'
     square(f0,amplitude,sampling_frequency,frame,higher_harmonics_number,square_fname)
 
+    #triangle wave
+    triangle_fname='triangle.wav'
+    triangle(f0,amplitude,sampling_frequency,frame,higher_harmonics_number,triangle_fname)
+
 
 def create_sine(f0,amplitude,sampling_frequency,frame):
     """
@@ -66,6 +70,20 @@ def square(f0,amplitude,sampling_frequency,frame,higher_harmonics_number,square_
     
     square_wave=minmax_normalized(square_wave)
     wave_pack(square_wave,frame,sampling_frequency,square_fname)
+
+def triangle(f0,amplitude,sampling_frequency,frame,higher_harmonics_number,triangle_fname):
+    """
+    create triangle wave
+    """
+    triangle_wave=create_sine(f0,amplitude,sampling_frequency,frame)
+    counter=1
+    for i in range(3,2*higher_harmonics_number,2):
+        waves=(1/(i**2))*create_sine(f0*i,amplitude,sampling_frequency,frame)*((-1)**counter)
+        triangle_wave+=waves
+        counter+=1
+    
+    triangle_wave=minmax_normalized(triangle_wave)
+    wave_pack(triangle_wave)
 
 def minmax_normalized(waves):
     """
