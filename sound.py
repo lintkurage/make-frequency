@@ -27,25 +27,29 @@ def main():
     f0=440.0
     higher_harmonics_number=7
     sampling_frequency=48000
-    secounds=3
+    seconds=3
     amplitude=1
+
+    frame=np.arange(0,sampling_frequency*seconds)
 
     #sin wave
     sine_fname='sine.wav'
+    sine(f0,amplitude,sampling_frequency,frame,sine_fname)
 
 
-def create_sine(f0,amplitude,sampling_frequency,seconds):
+def create_sine(f0,amplitude,sampling_frequency,frame):
     """
     create sin wave
     """
-    frame=np.arange(0,sampling_frequency*seconds)
     return amplitude*np.sin(2*np.pi*frame*f0/sampling_frequency)
 
-def sine(f0,amplitude,sampling_frequency,seconds,sine_fname):
+def sine(f0,amplitude,sampling_frequency,frame,sine_fname):
     """
     sin wave file
     """
-    sine_wave=create_sine(f0,amplitude,sampling_frequency,seconds)
+    sin_wave=create_sine(f0,amplitude,sampling_frequency,frame)
+    sin_wave=minmax_normalized(sin_wave)
+    wave_pack(sin_wave,frame,sampling_frequency,sine_fname)
 
 def minmax_normalized(waves):
     """
@@ -55,6 +59,19 @@ def minmax_normalized(waves):
     max_value=np.max(waves)
     normalized_wave=2*((waves-min_value)/(max_value-min_value))-1
     return normalized_wave
+
+def wave_pack(waves,frame,sampling_frequency,sine_fname):
+    """
+    quantization wav file create function
+    """
+    waves=np.array(waves*(2**15-1)).astype(np.int16)
+
+    binary_wave=struct.pack("h"*len(frame),*waves)  #バイナリデータとしてパック
+    wave_write=wave.Wave_write(sine_fname)
+    parameters=(1,2,sampling_frequency,len(frame),'NONE','not compressed')
+    wave_write.setparams(parameters)
+    wave_write.writeframes(binary_wave)
+    wave_write.close()
 
 if __name__=='__main__':
 
