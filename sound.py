@@ -30,6 +30,17 @@ def main():
     secounds=3
     amplitude=1
 
+    #sin wave
+    sine_fname='sine.wav'
+
+
+def create_sine(f0,amplitude,sampling_frequency,seconds):
+    """
+    create sin wave
+    """
+    frame=np.arange(0,sampling_frequency*seconds)
+    return amplitude*np.sin(2*np.pi*frame*f0/sampling_frequency)
+
 
 if __name__=='__main__':
 
