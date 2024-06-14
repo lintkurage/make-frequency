@@ -41,6 +41,20 @@ def create_sine(f0,amplitude,sampling_frequency,seconds):
     frame=np.arange(0,sampling_frequency*seconds)
     return amplitude*np.sin(2*np.pi*frame*f0/sampling_frequency)
 
+def sine(f0,amplitude,sampling_frequency,seconds,sine_fname):
+    """
+    sin wave file
+    """
+    sine_wave=create_sine(f0,amplitude,sampling_frequency,seconds)
+
+def minmax_normalized(waves):
+    """
+    wave normalized for -1 to 1
+    """
+    min_value=np.min(waves)
+    max_value=np.max(waves)
+    normalized_wave=2*((waves-min_value)/(max_value-min_value))-1
+    return normalized_wave
 
 if __name__=='__main__':
 
