@@ -6,7 +6,7 @@
 """
 
 __author__='lintkurage'
-__version__='0.3.0'
+__version__='0.4.0'
 __date__='2024/06/14'
 
 import struct
@@ -44,6 +44,9 @@ def main():
     triangle_fname='triangle.wav'
     triangle(f0,amplitude,sampling_frequency,frame,higher_harmonics_number,triangle_fname)
 
+    #sawtooth wave
+    sawtooth_fname='sawtooth.wav'
+    sawtooth(f0,amplitude,sampling_frequency,frame,higher_harmonics_number,sawtooth_fname)
 
 def create_sine(f0,amplitude,sampling_frequency,frame):
     """
@@ -83,7 +86,19 @@ def triangle(f0,amplitude,sampling_frequency,frame,higher_harmonics_number,trian
         counter+=1
     
     triangle_wave=minmax_normalized(triangle_wave)
-    wave_pack(triangle_wave)
+    wave_pack(triangle_wave,frame,sampling_frequency,triangle_fname)
+
+def sawtooth(f0,amplitude,sampling_frequency,frame,higher_harmonics_number,sawtooth_fname):
+    """
+    create sawtooth wave
+    """
+    sawtooth_wave=create_sine(f0,amplitude,sampling_frequency,frame)
+    for i in range(2,higher_harmonics_number+1,1):
+        waves=(1/i)*create_sine(f0*i,amplitude,sampling_frequency,frame)
+        sawtooth_wave+=waves
+    
+    sawtooth_wave=minmax_normalized(sawtooth_wave)
+    wave_pack(sawtooth_wave,frame,sampling_frequency,sawtooth_fname)
 
 def minmax_normalized(waves):
     """
