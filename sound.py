@@ -8,3 +8,31 @@
 __author__='lintkurage'
 __version__='0.0.1'
 __date__='2024/06/14'
+
+import struct
+import wave
+import numpy as np
+
+def main():
+    """
+    main program
+
+    parameters
+    f0:fundamental frequency(initial value:440Hz)
+    higher_harmonics_number:higher harmonics number(initial value:7)
+    sampling_frequency:sampling frequency(initial value:48000Hz)
+    seconds:seconds(initial value:3sec)
+    amplitude:amplitude(initial value:1)
+    """
+    f0=440.0
+    higher_harmonics_number=7
+    sampling_frequency=48000
+    secounds=3
+    amplitude=1
+
+
+if __name__=='__main__':
+
+    import sys
+
+    sys.exit(main())
