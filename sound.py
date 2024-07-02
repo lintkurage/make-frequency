@@ -7,7 +7,7 @@ sin,square,triangle,sawtooth wave makeing program
 
 __author__='lintkurage'
 __version__='1.0.0'
-__date__='2024/06/14'
+__date__='2024/07/2'
 
 import struct
 import wave
